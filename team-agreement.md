@@ -121,7 +121,7 @@ NOTE: While researching and experimentation is always encouraged, writing and/or
 
 Make a single copy of the Presentation Deck Template. Share your copy will all team members, so everyone is working from the same file.
 
-Link to the shared doc in your project plan: [Presentation Deck](https://docs.google.com/presentation/d/14nuWanlPmeCcff3eQuGlL273B-p6ICoK9Ij0aeuPHes/edit?usp=sharing)
+Link to the shared doc in your project plan: [Presentation Deck](https://docs.google.com/presentation/d/1EsGm2GmQki0AkG6uVqTrf0r7RUsNsWd0pOMmk4W8thU/edit?usp=sharing)
 
 Schedule your practice session
 
