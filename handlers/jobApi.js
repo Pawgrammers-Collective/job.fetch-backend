@@ -2,7 +2,7 @@
 const axios = require('axios');
 
 
-// Job Data Filter
+// Job Data Filter for front end
 class JobFilter{
     constructor(job){
         this.title= job.title,
@@ -13,7 +13,7 @@ class JobFilter{
     }
 }
 
-
+// API call for Jobs
 async function handleGetJobs(request,response){
 
     let location = request.query.location
