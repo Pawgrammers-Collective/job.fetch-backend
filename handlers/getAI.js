@@ -18,7 +18,7 @@ async function getAI(request, response) {
     ],
     model: "gpt-3.5-turbo",
   });
-  response.status(200).send(completion);
+  response.send(completion);
   console.log(completion.choices[0]);
 }
 
