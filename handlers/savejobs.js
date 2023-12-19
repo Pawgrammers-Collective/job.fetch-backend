@@ -21,6 +21,23 @@ async function handleSaveJobs(request,response){
         response.send('job save not working', e)
     }
 }
+
+
+async function handleGetSavedJobs(request, response){
+    let filter = {};
+    if(request.user){
+        filter.email = request.user.email
+    }
+    try{
+        const savedJobs = await Jobs.find(filter)
+        if(savedJobs.length > 0){
+            response.status(200).json(savedJobs)
+        }else{
+            response.status(400).send('No Saved Jobs')
+        }}catch(e){
+            response.status(400).send(e)
+        }
+}
 // This is from can-o-books, only use for ref-------------------------------------------------------------------
 // async function handleJob( request, response ) {
 //     let filter = { };
@@ -42,4 +59,4 @@ async function handleSaveJobs(request,response){
 //   }
   
 
-module.exports = handleSaveJobs
+module.exports = {handleSaveJobs, handleGetSavedJobs};

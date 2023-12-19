@@ -13,14 +13,18 @@ app.use(verifyUser);
 
 // Interal Dependencies
 const handleGetJobs = require('./handlers/jobApi.js');
-const handleSaveJobs = require('./handlers/savejobs.js');
+const {handleSaveJobs, handleGetSavedJobs} = require('./handlers/savejobs.js')
+const handleGetNews = require('./handlers/newsApi.js')
 const getAI = require('./handlers/getAI.js');
 const { get } = require('mongoose');
 
 
+
 // Route Handlers 
-app.get('/jobs', handleGetJobs);
-app.post('/jobs', handleSaveJobs);
+app.get('/jobs', handleGetJobs)
+app.post('/jobs', handleSaveJobs)
+app.get('/jobs/saved', handleGetSavedJobs)
+app.get('/news', handleGetNews)
 app.get('/cover', getAI);
 
 
