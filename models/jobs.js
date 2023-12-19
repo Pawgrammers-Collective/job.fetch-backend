@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 
-const dogSchema = new mongoose.Schema({
-  name: String,
-  breed: String,
-  tail: Boolean,
-  hair: String,
+const jobSchema = new mongoose.Schema({
+  jobData: Object,
   email: String
 });
 
@@ -12,7 +9,7 @@ const dogSchema = new mongoose.Schema({
 
 // This "Dog" ends up being a constructor/class based on that schema
 // Mongoose will help us to manage that...
-const Dog = mongoose.model('Dog', dogSchema);
+const Job = mongoose.model('Job', jobSchema);
 
 // We're exporting it here so that we can ... import it elsewhere
-module.exports = Dog;
+module.exports = Job;
