@@ -6,20 +6,30 @@ const openAIInstance = new openai({
 });
 
 async function getAI(request, response) {
-  jobTitle = request.query.jobTitle;
-  jobDescription = request.query.jobDescription;
+  try {
+    const jobTitle = request.query.jobTitle;
+    const jobDescription = request.query.jobDescription;
 
-  const completion = await openAIInstance.chat.completions.create({
-    messages: [
-      {
-        role: "system",
-        content: `Create a cover letter with this title : ${jobTitle} and description: ${jobDescription}`,
-      },
-    ],
-    model: "gpt-3.5-turbo",
-  });
-  response.send(completion);
-  console.log(completion.choices[0]);
+    const completion = await openAIInstance.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: `Create a cover letter with this title: ${jobTitle} and description: ${jobDescription}`,
+        },
+      ],
+      model: "gpt-3.5-turbo",
+    });
+
+    const coverLetterContent = completion.choices[0].message.content;
+
+    
+
+    response.status(200).send({
+      coverLetter: coverLetterContent,
+    });
+  } catch (e) {
+    response.status(500).send('Error generating and saving cover letter', e);
+  }
 }
 
 module.exports = getAI;
