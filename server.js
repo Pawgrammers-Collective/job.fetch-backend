@@ -15,7 +15,8 @@ app.use(verifyUser);
 const handleGetJobs = require('./handlers/jobApi.js');
 const {handleSaveJobs, handleGetSavedJobs} = require('./handlers/savejobs.js')
 const handleGetNews = require('./handlers/newsApi.js')
-const getAI = require('./handlers/getAI.js');
+const getCover = require('./handlers/getAI.js');
+const getInterviewQuestions = require('./handlers/getInterviewQuestions.js');
 const { get } = require('mongoose');
 
 
@@ -25,7 +26,8 @@ app.get('/jobs', handleGetJobs)
 app.post('/jobs', handleSaveJobs)
 app.get('/jobs/saved', handleGetSavedJobs)
 app.get('/news', handleGetNews)
-app.get('/cover', getAI);
+app.get('/cover', getCover);
+app.get('/interview', getInterviewQuestions);
 
 
 const server = {
