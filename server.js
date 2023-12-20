@@ -7,7 +7,7 @@ const verifyUser = require('./middleware/authorize.js')
 
 // Middleware
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 app.use(verifyUser);
 
 
