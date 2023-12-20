@@ -8,11 +8,17 @@ async function handleSaveJobs(request,response){
     try{
         console.log(request.body);
         let savedJob = request.body;
-        let userEmail = 'kylealeman18@gmail.com';
-        let jobData = {
-            jobData: savedJob,
-            email: userEmail
-        }
+        let userEmail = request.user ? request.user.email : null;
+
+    if (!userEmail) {
+      return response.status(401).send('Unauthorized');
+    }
+
+    let jobData = {
+      jobData: savedJob,
+      email: userEmail
+    };
+
         let addedSavedJob = await Jobs.create(jobData)
 
         response.status(201).send(addedSavedJob)

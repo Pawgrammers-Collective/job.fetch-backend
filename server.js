@@ -16,7 +16,8 @@ const handleGetJobs = require('./handlers/jobApi.js');
 const {handleSaveJobs, handleGetSavedJobs} = require('./handlers/savejobs.js')
 const handleGetNews = require('./handlers/newsApi.js')
 const getAI = require('./handlers/getAI.js');
-const { get } = require('mongoose');
+const handleDeleteJobs = require('./handlers/deleteJobs.js');
+// const { get } = require('mongoose');
 
 
 
@@ -26,6 +27,7 @@ app.post('/jobs', handleSaveJobs)
 app.get('/jobs/saved', handleGetSavedJobs)
 app.get('/news', handleGetNews)
 app.get('/cover', getAI);
+app.delete('/jobs/:id', handleDeleteJobs); 
 
 
 const server = {
