@@ -13,21 +13,27 @@ app.use(verifyUser);
 
 // Interal Dependencies
 const handleGetJobs = require('./handlers/jobApi.js');
-const {handleSaveJobs, handleGetSavedJobs} = require('./handlers/savejobs.js')
-const handleGetNews = require('./handlers/newsApi.js')
-const getCover = require('./handlers/getAI.js');
+const {handleSaveJobs, handleGetSavedJobs, deleteSavedJobs} = require('./handlers/savejobs.js')
+const handleGetNews = require('./handlers/newsApi.js');
+const {getAI , saveAI} = require('./handlers/getAI.js');
 const getInterviewQuestions = require('./handlers/getInterviewQuestions.js');
-const { get } = require('mongoose');
 
 
+
+
+//   /delete/12384124
 
 // Route Handlers 
-app.get('/jobs', handleGetJobs)
-app.post('/jobs', handleSaveJobs)
-app.get('/jobs/saved', handleGetSavedJobs)
-app.get('/news', handleGetNews)
-app.get('/cover', getCover);
+
+app.get('/jobs', handleGetJobs);
+app.delete('/jobs/:id', deleteSavedJobs);
+app.post('/jobs', handleSaveJobs);
+app.get('/jobs/saved', handleGetSavedJobs);
+app.get('/news', handleGetNews);
+app.get('/cover', getAI);
+app.post('/cover/saved', saveAI);
 app.get('/interview', getInterviewQuestions);
+
 
 
 const server = {

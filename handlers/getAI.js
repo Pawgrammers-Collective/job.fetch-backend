@@ -1,6 +1,6 @@
 const openai = require("openai");
 const openAIKey = process.env.OPENAI_API_KEY;
-
+const SavedAI = require('../models/coverletter')
 const openAIInstance = new openai({
   apiKey: openAIKey,
 });
@@ -32,4 +32,26 @@ async function getAI(request, response) {
   }
 }
 
-module.exports = getAI;
+async function saveAI(request, response){
+  let filter = {};
+    if(request.user){
+        filter.email = request.user.email
+    }
+    // try{
+        console.log(request.body);
+        let coverLetter = request.body.coverletter;
+        let userEmail = request.user.email;
+        let save = {
+            coverletter: coverLetter,
+            email: userEmail
+        }
+        let addedSavedCover = await SavedAI.create(save)
+
+        response.status(201).send(addedSavedCover)
+        
+        // } catch (e){
+        // response.send('ai save not working', e)
+    // }
+}
+
+module.exports = { getAI, saveAI };
