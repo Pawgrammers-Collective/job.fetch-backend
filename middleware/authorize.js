@@ -17,9 +17,9 @@ function verifyUser(request, response, next) {
   }
 
   try {
-    // const token = request.headers.authorization.split(' ')[1];
-    // jwt.verify(token, getKey, {}, valid);
-    valid(null, {email: 'kylealeman18@gmail.com'})
+    const token = request.headers.authorization.split(' ')[1];
+    jwt.verify(token, getKey, {}, valid);
+    // valid(null, {email: 'kylealeman18@gmail.com'})
   } catch (error) {
     next('Not Authorized');
   }
@@ -37,11 +37,15 @@ const client = jwksClient({
 
 // Match the JWT's key to your Auth0 Account Key so we can validate it
 function getKey(header, callback) {
+  // console.log(callback, header)
   client.getSigningKey(header.kid, function (err, key) {
+    // console.log(key, err)
     const signingKey = key.publicKey || key.rsaPublicKey;
-    callback(null, signingKey);
+    callback(err, signingKey);
   });
 }
+// console.log(client)
+// console.log(client.getSigningKey())
 
 
 

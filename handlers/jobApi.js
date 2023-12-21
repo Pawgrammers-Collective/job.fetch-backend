@@ -6,6 +6,7 @@ const axios = require('axios');
 class JobFilter{
     constructor(job){
         this.title= job.title,
+        this.companyName = job.company_name,
         this.location= job.location,
         this.description= job.description,
         this.qualifications= job.job_highlights[0]
@@ -15,9 +16,7 @@ class JobFilter{
 
 // API call for Jobs
 async function handleGetJobs(request,response){
-
     let location = request.query.location
-
     try{
         let locationJobs = await axios.get(`https://serpapi.com/search?engine=google_jobs`,{
             params: {
@@ -27,6 +26,7 @@ async function handleGetJobs(request,response){
                 api_key: process.env.SERPAPI
             },
         })
+        // console.log(locationJobs.data.jobs_results);
         response.status(200).send(locationJobs.data.jobs_results.map((v) =>{
             return new JobFilter(v);
         }))
