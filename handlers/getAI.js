@@ -38,11 +38,14 @@ async function saveAI(request, response) {
     filter.email = request.user.email
 
     try {
-      console.log(request.body);
-      let coverLetter = request.body.coverLetter;
+      console.log(request.body.jobDescription);
+      console.log(request.body.coverletter.coverLetter);
+      let coverLetter = request.body.coverletter.coverLetter;
+      let jobDescription = request.body.jobDescription;
       let userEmail = request.user.email;
       let save = {
         coverletter: coverLetter,
+        jobDescription: jobDescription,
         email: userEmail
       }
       let addedSavedCover = await SavedAI.create(save)
@@ -50,7 +53,7 @@ async function saveAI(request, response) {
       response.status(201).send(addedSavedCover)
 
     } catch (e) {
-      response.send('ai save not working', e)
+      response.status(500).send({message: 'ai save not working', error: e.message});
     }
   }
 }
