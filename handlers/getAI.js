@@ -38,11 +38,14 @@ async function saveAI(request, response) {
     filter.email = request.user.email
 
     try {
-      console.log(request.body);
-      let coverLetter = request.body.coverletter;
+      console.log(request.body.jobDescription);
+      console.log(request.body.coverletter.coverLetter);
+      let coverLetter = request.body.coverletter.coverLetter;
+      let jobDescription = request.body.jobDescription;
       let userEmail = request.user.email;
       let save = {
         coverletter: coverLetter,
+        jobDescription: jobDescription,
         email: userEmail
       }
       let addedSavedCover = await SavedAI.create(save)
@@ -50,9 +53,37 @@ async function saveAI(request, response) {
       response.status(201).send(addedSavedCover)
 
     } catch (e) {
-      response.send('ai save not working', e)
+      response.status(500).send({message: 'ai save not working', error: e.message});
     }
   }
 }
 
-module.exports = { getAI, saveAI };
+async function getSavedAI(request, response) {
+  let filter = {};
+  if (request.user) {
+    filter.email = request.user.email
+  }
+    try {
+      let savedCovers = await SavedAI.find(filter);
+        if(savedCovers.length > 0){
+          response.status(200).json(savedCovers)
+        } else {
+          response.status(400).send('No Saved Cover Letters')
+      }
+    } catch (e) {
+      response.status(500).send({message: 'get saved coverletters not working', error: e.message});
+    }
+  }
+
+async function deleteSavedAI(request, response) {
+  try {
+    let id = request.params.id;
+    let deletedCover = await SavedAI.findByIdAndDelete(id);
+    response.status(204).send({});
+    console.log('Deleted', deletedCover);
+  } catch (e) {
+    response.status(500).send({message: 'delete saved coverletters not working', error: e.message});
+  }
+}
+
+module.exports = { getAI, saveAI, getSavedAI, deleteSavedAI };
