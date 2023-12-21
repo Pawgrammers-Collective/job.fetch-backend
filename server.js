@@ -21,7 +21,6 @@ const getInterviewQuestions = require('./handlers/getInterviewQuestions.js');
 
 
 // Route Handlers 
-
 app.get('/jobs', handleGetJobs);
 app.delete('/jobs/:id', deleteSavedJobs);
 app.post('/jobs', handleSaveJobs);
