@@ -75,4 +75,15 @@ async function getSavedAI(request, response) {
     }
   }
 
-module.exports = { getAI, saveAI, getSavedAI };
+async function deleteSavedAI(request, response) {
+  try {
+    let id = request.params.id;
+    let deletedCover = await SavedAI.findByIdAndDelete(id);
+    response.status(204).send({});
+    console.log('Deleted', deletedCover);
+  } catch (e) {
+    response.status(500).send({message: 'delete saved coverletters not working', error: e.message});
+  }
+}
+
+module.exports = { getAI, saveAI, getSavedAI, deleteSavedAI };
