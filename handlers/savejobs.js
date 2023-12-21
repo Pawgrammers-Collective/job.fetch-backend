@@ -5,10 +5,14 @@ const Jobs = require('../models/jobs.js')
 
 
 async function handleSaveJobs(request,response){
+    let filter = {};
+    if(request.user){
+        filter.email = request.user.email
+    }
     try{
         console.log(request.body);
         let savedJob = request.body;
-        let userEmail = 'kylealeman18@gmail.com';
+        let userEmail = request.user.email;
         let jobData = {
             jobData: savedJob,
             email: userEmail
@@ -38,6 +42,23 @@ async function handleGetSavedJobs(request, response){
             response.status(400).send(e)
         }
 }
+
+async function deleteSavedJobs(request, response){
+    console.log('hello!')
+    try{
+        let id = request.params.id;
+        console.log(request.params)
+        let deletedjob = await Jobs.findByIdAndDelete(id);
+        console.log('Deleated',deletedjob);
+        response.status(204).send({});
+    }catch(e){
+        console.log(e);
+    }
+    
+    
+}
+
+
 // This is from can-o-books, only use for ref-------------------------------------------------------------------
 // async function handleJob( request, response ) {
 //     let filter = { };
@@ -59,4 +80,4 @@ async function handleGetSavedJobs(request, response){
 //   }
   
 
-module.exports = {handleSaveJobs, handleGetSavedJobs};
+module.exports = {handleSaveJobs, handleGetSavedJobs , deleteSavedJobs};
