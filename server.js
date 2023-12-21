@@ -25,7 +25,7 @@ const { get } = require('mongoose');
 app.get('/jobs', handleGetJobs)
 app.post('/jobs', handleSaveJobs)
 app.get('/jobs/saved', handleGetSavedJobs)
-app.get('/news', handleGetNews)
+app.get('/news', handleGetNews);
 app.get('/cover', getCover);
 app.get('/interview', getInterviewQuestions);
 
