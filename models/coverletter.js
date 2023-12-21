@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const coverLetterSchema = new mongoose.Schema({
   coverletter: String,
   jobDescription: String,
+  email: String
   
 });
 
