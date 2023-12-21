@@ -6,12 +6,12 @@ const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 
 async function handleGetNews(request, response) {
-    // let companyName = request.query.data;
-    console.log(request.query.data);
+    let companyName = request.query.company;
+    console.log(request.query);
     try{
         let news = await newsapi.v2.everything({
             // q will be company names from saved jobs
-            q: 'hulu',
+            q: companyName,
             serchIn: 'title',
             sortBy: 'popularity',
             language: 'en'
