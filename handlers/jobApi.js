@@ -16,9 +16,7 @@ class JobFilter{
 
 // API call for Jobs
 async function handleGetJobs(request,response){
-
     let location = request.query.location
-
     try{
         let locationJobs = await axios.get(`https://serpapi.com/search?engine=google_jobs`,{
             params: {
