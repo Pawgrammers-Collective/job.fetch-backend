@@ -58,4 +58,21 @@ async function saveAI(request, response) {
   }
 }
 
-module.exports = { getAI, saveAI };
+async function getSavedAI(request, response) {
+  let filter = {};
+  if (request.user) {
+    filter.email = request.user.email
+  }
+    try {
+      let savedCovers = await SavedAI.find(filter);
+        if(savedCovers.length > 0){
+          response.status(200).json(savedCovers)
+        } else {
+          response.status(400).send('No Saved Cover Letters')
+      }
+    } catch (e) {
+      response.status(500).send({message: 'get saved coverletters not working', error: e.message});
+    }
+  }
+
+module.exports = { getAI, saveAI, getSavedAI };

@@ -15,7 +15,7 @@ app.use(verifyUser);
 const handleGetJobs = require('./handlers/jobApi.js');
 const {handleSaveJobs, handleGetSavedJobs, deleteSavedJobs} = require('./handlers/savejobs.js')
 const handleGetNews = require('./handlers/newsApi.js');
-const {getAI , saveAI} = require('./handlers/getAI.js');
+const {getAI , saveAI, getSavedAI} = require('./handlers/getAI.js');
 const getInterviewQuestions = require('./handlers/getInterviewQuestions.js');
 
 
@@ -28,6 +28,7 @@ app.post('/jobs', handleSaveJobs);
 app.get('/jobs/saved', handleGetSavedJobs);
 app.get('/news', handleGetNews);
 app.get('/cover', getAI);
+app.get('/cover/saved', getSavedAI);
 app.post('/cover/saved', saveAI);
 app.get('/interview', getInterviewQuestions);
 
