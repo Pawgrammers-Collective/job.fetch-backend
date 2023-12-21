@@ -39,7 +39,7 @@ async function saveAI(request, response) {
 
     try {
       console.log(request.body);
-      let coverLetter = request.body.coverletter;
+      let coverLetter = request.body.coverLetter;
       let userEmail = request.user.email;
       let save = {
         coverletter: coverLetter,
