@@ -20,9 +20,6 @@ const getInterviewQuestions = require('./handlers/getInterviewQuestions.js');
 
 
 
-
-//   /delete/12384124
-
 // Route Handlers 
 
 app.get('/jobs', handleGetJobs);
