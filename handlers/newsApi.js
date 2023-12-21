@@ -6,17 +6,19 @@ const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 
 
 async function handleGetNews(request, response) {
-    let companyName = request.query.data;
+    // let companyName = request.query.data;
+    console.log(request.query.data);
     try{
         let news = await newsapi.v2.everything({
             // q will be company names from saved jobs
-            q: companyName,
+            q: 'hulu',
             serchIn: 'title',
             sortBy: 'popularity',
             language: 'en'
         })
         console.log(news);
-        response.status(200).send(news.articles);
+        // response.status(200).send(news.articles);
+        response.send(news)
     }catch{
         response.send('error')
     }  
