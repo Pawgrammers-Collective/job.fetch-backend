@@ -38,7 +38,7 @@ async function handleGetSavedJobs(request, response) {
         if (savedJobs.length > 0) {
             response.status(200).json(savedJobs)
         } else {
-            response.status(400).send('No Saved Jobs')
+            response.status(200).send(null)
         }
     } catch (e) {
         response.status(400).send(e)
